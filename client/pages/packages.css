@@ -1,0 +1,208 @@
+:root {
+    --bg-dark: #090a0f;
+    --card-bg: #13151c;
+    --card-border: #232733;
+    --gold-main: #d4af37;
+    --gold-light: #f3e5ab;
+    --gold-gradient: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
+    --gold-gradient-hover: linear-gradient(135deg, #aa771c, #fbf5b7, #b38728, #fcf6ba, #bf953f);
+    --text-main: #ffffff;
+    --text-muted: #8b92a5;
+    --transition: all 0.3s ease;
+}
+
+/* Section */
+.pricing-section {
+    padding: 72px 20px;
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+}
+
+.pricing-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Header */
+.pricing-header {
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.pricing-header h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.pricing-header p {
+    margin-top: 10px;
+    color: var(--text-muted);
+    font-size: 1rem;
+}
+
+/* Cards Layout */
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+/* Card */
+.pricing-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 25px 22px;
+    border-radius: 16px;
+    text-align: center;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.pricing-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--gold-main);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15);
+}
+
+/* Popular Badge */
+.pricing-card.popular {
+    border: 1px solid var(--gold-main);
+}
+
+.pricing-card.popular::before {
+    content: "Most Popular";
+    position: absolute;
+    top: 18px;
+    right: -38px;
+    background: var(--gold-gradient);
+    color: #000;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 35px;
+    transform: rotate(45deg);
+}
+
+/* Title */
+.pricing-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 8px;
+}
+
+/* Price */
+.price {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--gold-main);
+    margin: 12px 0;
+}
+
+/* Features List */
+.pricing-features {
+    list-style: none;
+    padding: 0;
+    margin: 15px 0;
+}
+
+.pricing-features li {
+    margin: 6px 0;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+/* Button */
+.pricing-btn {
+    margin-top: 15px;
+    padding: 10px 22px;
+    border-radius: 8px;
+    border: 2px solid #ffd700;
+    /* strong yellow border */
+    cursor: pointer;
+    font-weight: 700;
+    background-color: #ffd700;
+    /* yellow background */
+    color: #e80707;
+    /* black text for contrast */
+    transition: all 0.3s ease;
+    display: inline-block;
+    box-shadow: 0 6px 18px rgba(255, 215, 0, 0.4);
+}
+
+.pricing-btn:hover {
+    background-color: #ffcc00;
+    /* darker yellow on hover */
+    border-color: #ffcc00;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 25px rgba(255, 215, 0, 0.6);
+}
+
+.addons-section h3 {
+    font-size: 2rem;
+    margin-bottom: 40px;
+    background: var(--gold-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Grid Layout */
+.addons-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+/* Addon Card */
+.addon-card {
+    background: var(--card-bg);
+    border: 1px solid var(--card-border);
+    padding: 22px;
+    border-radius: 14px;
+    transition: var(--transition);
+}
+
+.addon-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--gold-main);
+    box-shadow: 0 8px 20px rgba(212, 175, 55, 0.15);
+}
+
+.addon-card h4 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+.addon-card p {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gold-main);
+}
+
+/* Responsive */
+@media (max-width: 992px) {
+
+    .pricing-cards,
+    .addons-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 576px) {
+
+    .pricing-cards,
+    .addons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .pricing-header h2 {
+        font-size: 2rem;
+    }
+}

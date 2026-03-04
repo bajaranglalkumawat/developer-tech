@@ -3,6 +3,7 @@ import express from "express";
 import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleQuerySubmit } from "./routes/query";
+import { handleCreateReview, handleGetApprovedReviews } from "./routes/reviews";
 
 export function createServer() {
   const app = express();
@@ -20,6 +21,8 @@ export function createServer() {
 
   app.get("/api/demo", handleDemo);
   app.post("/api/query", handleQuerySubmit);
+  app.post("/api/reviews", handleCreateReview);
+  app.get("/api/reviews", handleGetApprovedReviews);
 
   return app;
 }

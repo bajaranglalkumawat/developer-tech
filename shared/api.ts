@@ -52,4 +52,5 @@ export interface CreateReviewResponse {
 export interface GetReviewsResponse {
   success: boolean;
   reviews: Review[];
+  message?: string;
 }

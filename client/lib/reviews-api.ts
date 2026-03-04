@@ -28,7 +28,7 @@ export async function getApprovedReviews(): Promise<Review[]> {
   const data = (await response.json()) as GetReviewsResponse;
 
   if (!response.ok || !data.success) {
-    throw new Error("Unable to load reviews.");
+    throw new Error(data.message || "Unable to load reviews.");
   }
 
   return data.reviews;

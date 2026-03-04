@@ -13,7 +13,9 @@
  *    - REVIEW_GOOGLE_SHEETS_WEBHOOK_URL (for reviews, optional)
  */
 
-const SHEET_ID = "AKfycbx8FO2c7J5cYWS4ViXPboJKMo3fX0jOQk_Gor4p_ZfBGTES_AJVKVfCxeVofYlxQFpN";
+const SHEET_ID = "AKfycbyvyamFchYlk3M7DyEEGLa9EEmxtzdCtaVQRIR-r6F_7ISJoUBLh3vQ-wsQTb1LmJLU";
+
+
 const QUERY_SHEET_NAME = "queries";
 const REVIEW_SHEET_NAME = "developer reviews";
 

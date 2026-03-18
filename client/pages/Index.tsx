@@ -6,8 +6,6 @@ import Team from "@/components/Team";
 import Packages from "@/components/Packages";
 import Contact from "@/components/Contact";
 import WhatsAppButton from "@/components/WhatsAppButton";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ReviewForm from "@/components/ReviewForm";
 
 
 export default function Index() {
@@ -20,8 +18,6 @@ export default function Index() {
         <Team />
         <About />
         <Packages />
-        <TestimonialsSection />
-        <ReviewForm />
         <Contact />
       </main>
 
@@ -113,18 +109,6 @@ export default function Index() {
                     className="hover:text-blue-400 transition-colors"
                   >
                     Packages
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("testimonials")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Testimonials
                   </button>
                 </li>
 

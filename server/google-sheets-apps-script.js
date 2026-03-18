@@ -1,23 +1,20 @@
 /**
- * Google Apps Script webhook for both:
- * - Query form rows
- * - Review/Testimonial rows
+ * Deploy this in Google Apps Script as a Web App.
+ * 1) Open your Google Sheet.
+ * 2) Extensions -> Apps Script.
+ * 3) Paste this code and save.
+ * 4) Deploy -> New deployment -> Web app.
+ * 5) Execute as: Me, Access: Anyone with the link.
+ * 6) Copy the web app URL and set GOOGLE_SHEETS_WEBHOOK_URL in server env.
  *
- * Deploy:
- * 1) Open sheet -> Extensions -> Apps Script
- * 2) Paste this file
- * 3) Update SHEET_ID
- * 4) Deploy as Web App (Execute as: Me, Access: Anyone with link)
- * 5) Put URL into env:
- *    - GOOGLE_SHEETS_WEBHOOK_URL (for query)
- *    - REVIEW_GOOGLE_SHEETS_WEBHOOK_URL (for reviews, optional)
+ * Required:
+ * - Replace SHEET_ID with your target Google Sheet id.
+ *   Example sheet URL:
+ *   https://docs.google.com/spreadsheets/d/<SHEET_ID>/edit
  */
 
-const SHEET_ID = "AKfycbyvyamFchYlk3M7DyEEGLa9EEmxtzdCtaVQRIR-r6F_7ISJoUBLh3vQ-wsQTb1LmJLU";
-
-
-const QUERY_SHEET_NAME = "queries";
-const REVIEW_SHEET_NAME = "developer reviews";
+const SHEET_ID = "PASTE_YOUR_SHEET_ID_HERE";
+const SHEET_NAME = "queries";
 
 function doPost(e) {
   try {
@@ -26,15 +23,30 @@ function doPost(e) {
     }
 
     const payload = JSON.parse(e.postData.contents);
-    const type = String(payload.type || "query").toLowerCase();
+    const ss = getSpreadsheet();
+    const sheet = ss.getSheetByName(SHEET_NAME) || ss.insertSheet(SHEET_NAME);
 
-    if (type === "review") {
-      saveReview(payload);
-      return jsonResponse({ success: true, message: "Review saved to sheet." });
+    if (sheet.getLastRow() === 0) {
+      sheet.appendRow([
+        "createdAt",
+        "name",
+        "email",
+        "phone",
+        "subject",
+        "message",
+      ]);
     }
 
-    saveQuery(payload);
-    return jsonResponse({ success: true, message: "Query saved to sheet." });
+    sheet.appendRow([
+      payload.createdAt || new Date().toISOString(),
+      payload.name || "",
+      payload.email || "",
+      payload.phone || "",
+      payload.subject || "",
+      payload.message || "",
+    ]);
+
+    return jsonResponse({ success: true, message: "Saved to Google Sheet" });
   } catch (err) {
     return jsonResponse({
       success: false,
@@ -44,28 +56,14 @@ function doPost(e) {
   }
 }
 
-function doGet(e) {
+function doGet() {
   try {
     const ss = getSpreadsheet();
-    const params = e && e.parameter ? e.parameter : {};
-    const type = String(params.type || "").toLowerCase();
-    const approvedOnly = String(params.approved || "").toLowerCase() === "true";
-
-    if (type === "review") {
-      const reviews = readReviews(ss, approvedOnly);
-      return jsonResponse({
-        success: true,
-        type: "review",
-        approvedOnly: approvedOnly,
-        reviews: reviews,
-      });
-    }
-
     return jsonResponse({
       success: true,
       message: "Webhook is live",
       spreadsheetName: ss.getName(),
-      sheets: [QUERY_SHEET_NAME, REVIEW_SHEET_NAME],
+      sheetName: SHEET_NAME,
     });
   } catch (err) {
     return jsonResponse({
@@ -76,100 +74,11 @@ function doGet(e) {
   }
 }
 
-function saveQuery(payload) {
-  const ss = getSpreadsheet();
-  const sheet = getOrCreateSheet(ss, QUERY_SHEET_NAME);
-  ensureHeader(sheet, [
-    "createdAt",
-    "name",
-    "email",
-    "phone",
-    "subject",
-    "message",
-  ]);
-
-  sheet.appendRow([
-    payload.createdAt || new Date().toISOString(),
-    payload.name || "",
-    payload.email || "",
-    payload.phone || "",
-    payload.subject || "",
-    payload.message || "",
-  ]);
-}
-
-function saveReview(payload) {
-  const ss = getSpreadsheet();
-  const sheet = getOrCreateSheet(ss, REVIEW_SHEET_NAME);
-  ensureHeader(sheet, [
-    "createdAt",
-    "clientName",
-    "companyName",
-    "rating",
-    "reviewMessage",
-    "clientImage",
-    "isApproved",
-  ]);
-
-  sheet.appendRow([
-    payload.createdAt || new Date().toISOString(),
-    payload.clientName || "",
-    payload.companyName || "",
-    Number(payload.rating || 0),
-    payload.reviewMessage || "",
-    payload.clientImage || "",
-    payload.isApproved === true ? "TRUE" : "FALSE",
-  ]);
-}
-
-function readReviews(ss, approvedOnly) {
-  const sheet = getOrCreateSheet(ss, REVIEW_SHEET_NAME);
-  const lastRow = sheet.getLastRow();
-  if (lastRow <= 1) {
-    return [];
-  }
-
-  const lastCol = sheet.getLastColumn();
-  const rows = sheet.getRange(2, 1, lastRow - 1, lastCol).getValues();
-
-  const reviews = rows.map(function(row, index) {
-    const createdAtCell = row[0];
-    return {
-      _id: "sheet-row-" + (index + 2),
-      createdAt: createdAtCell instanceof Date ? createdAtCell.toISOString() : String(createdAtCell || ""),
-      clientName: String(row[1] || ""),
-      companyName: String(row[2] || ""),
-      rating: Number(row[3] || 0),
-      reviewMessage: String(row[4] || ""),
-      clientImage: String(row[5] || ""),
-      isApproved: String(row[6] || "").toLowerCase() === "true",
-    };
-  });
-
-  if (!approvedOnly) {
-    return reviews;
-  }
-
-  return reviews.filter(function(item) {
-    return item.isApproved === true;
-  });
-}
-
-function getOrCreateSheet(ss, sheetName) {
-  return ss.getSheetByName(sheetName) || ss.insertSheet(sheetName);
-}
-
-function ensureHeader(sheet, expectedHeader) {
-  if (sheet.getLastRow() !== 0) {
-    return;
-  }
-  sheet.appendRow(expectedHeader);
-}
-
 function getSpreadsheet() {
   if (!SHEET_ID || SHEET_ID === "PASTE_YOUR_SHEET_ID_HERE") {
     throw new Error("Set SHEET_ID before deploying the web app.");
   }
+
   return SpreadsheetApp.openById(SHEET_ID);
 }
 

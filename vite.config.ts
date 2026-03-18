@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
+import { createServer as createApiServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -15,7 +16,15 @@ export default defineConfig({
   build: {
     outDir: "dist/spa",
   },
-  plugins: [react()],
+  plugins: [
+    react(),
+    {
+      name: "express-api-middleware",
+      configureServer(server) {
+        server.middlewares.use(createApiServer());
+      },
+    },
+  ],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),

@@ -30,30 +30,38 @@ async function sendAutoReply(payload: QuerySubmitRequest): Promise<ServiceResult
     };
   }
 
-  const response = await fetch("https://api.brevo.com/v3/smtp/email", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      "api-key": apiKey,
-    },
-    body: JSON.stringify({
-      sender: {
-        email: senderEmail,
-        name: senderName,
+  try {
+    const response = await fetch("https://api.brevo.com/v3/smtp/email", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "api-key": apiKey,
       },
-      to: [{ email: payload.email, name: payload.name }],
-      replyTo: { email: senderEmail, name: senderName },
-      subject: `We received your query: ${payload.subject}`,
-      textContent: `Hi ${payload.name},\n\nThanks for contacting us. We received your query and will get back to you shortly.\n\nSubject: ${payload.subject}\nMessage: ${payload.message}\n\nRegards,\n${senderName}`,
-    }),
-  });
+      body: JSON.stringify({
+        sender: {
+          email: senderEmail,
+          name: senderName,
+        },
+        to: [{ email: payload.email, name: payload.name }],
+        replyTo: { email: senderEmail, name: senderName },
+        subject: `We received your query: ${payload.subject}`,
+        textContent: `Hi ${payload.name},\n\nThanks for contacting us. We received your query and will get back to you shortly.\n\nSubject: ${payload.subject}\nMessage: ${payload.message}\n\nRegards,\n${senderName}`,
+      }),
+    });
 
-  if (!response.ok) {
-    const errorBody = await response.text();
+    if (!response.ok) {
+      const errorBody = await response.text();
+      return {
+        ok: false,
+        source: "email",
+        error: `Brevo API failed (${response.status}): ${errorBody}`,
+      };
+    }
+  } catch (error) {
     return {
       ok: false,
       source: "email",
-      error: `Brevo API failed (${response.status}): ${errorBody}`,
+      error: `Brevo request failed: ${error instanceof Error ? error.message : "unknown error"}`,
     };
   }
 
@@ -73,40 +81,48 @@ async function appendToGoogleSheet(
     };
   }
 
-  const response = await fetch(webhookUrl, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      createdAt: new Date().toISOString(),
-      ...payload,
-    }),
-  });
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        createdAt: new Date().toISOString(),
+        ...payload,
+      }),
+    });
 
-  if (!response.ok) {
-    const errorBody = await response.text();
+    if (!response.ok) {
+      const errorBody = await response.text();
+      return {
+        ok: false,
+        source: "google-sheet",
+        error: `Google Sheets webhook failed (${response.status}): ${errorBody}`,
+      };
+    }
+
+    const responseText = await response.text();
+    if (responseText) {
+      try {
+        const parsed = JSON.parse(responseText) as { success?: boolean; message?: string };
+        if (parsed.success === false) {
+          return {
+            ok: false,
+            source: "google-sheet",
+            error: `Google Sheets script rejected request: ${parsed.message ?? "unknown error"}`,
+          };
+        }
+      } catch {
+        // Some Apps Script deployments can return plain text; treat as success if HTTP status is ok.
+      }
+    }
+  } catch (error) {
     return {
       ok: false,
       source: "google-sheet",
-      error: `Google Sheets webhook failed (${response.status}): ${errorBody}`,
+      error: `Google Sheets request failed: ${error instanceof Error ? error.message : "unknown error"}`,
     };
-  }
-
-  const responseText = await response.text();
-  if (responseText) {
-    try {
-      const parsed = JSON.parse(responseText) as { success?: boolean; message?: string };
-      if (parsed.success === false) {
-        return {
-          ok: false,
-          source: "google-sheet",
-          error: `Google Sheets script rejected request: ${parsed.message ?? "unknown error"}`,
-        };
-      }
-    } catch {
-      // Some Apps Script deployments can return plain text; treat as success if HTTP status is ok.
-    }
   }
 
   return { ok: true, source: "google-sheet" };

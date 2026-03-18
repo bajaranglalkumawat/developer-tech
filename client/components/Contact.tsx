@@ -42,11 +42,23 @@ export default function Contact() {
         body: JSON.stringify(formData),
       });
 
-      const result = (await response.json()) as QuerySubmitResponse;
+      const responseText = await response.text();
+      let result: QuerySubmitResponse | null = null;
+
+      if (responseText) {
+        try {
+          result = JSON.parse(responseText) as QuerySubmitResponse;
+        } catch {
+          result = null;
+        }
+      }
+
       if (!response.ok || !result.success) {
         setStatus({
           ok: false,
-          text: result.message || "Failed to submit your query.",
+          text:
+            result?.message ||
+            `Failed to submit your query${response.status ? ` (${response.status})` : ""}.`,
         });
         return;
       }
@@ -56,10 +68,13 @@ export default function Contact() {
         text: "Query sent successfully. Please check your email.",
       });
       setFormData(initialForm);
-    } catch (_error) {
+    } catch (error) {
       setStatus({
         ok: false,
-        text: "Unable to submit query right now. Please try again.",
+        text:
+          error instanceof Error
+            ? `Unable to submit query right now. ${error.message}`
+            : "Unable to submit query right now. Please try again.",
       });
     } finally {
       setIsSubmitting(false);

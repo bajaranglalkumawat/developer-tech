@@ -22,4 +22,4 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
-});
+}); 

@@ -5,6 +5,16 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? "").trim();
+
+function getApiUrl(path: string) {
+  if (!apiBaseUrl) {
+    return path;
+  }
+
+  return `${apiBaseUrl.replace(/\/+$/, "")}${path}`;
+}
+
 const initialForm: QuerySubmitRequest = {
   name: "",
   email: "",
@@ -34,7 +44,7 @@ export default function Contact() {
     setStatus(null);
 
     try {
-      const response = await fetch("/api/query", {
+      const response = await fetch(getApiUrl("/api/query"), {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

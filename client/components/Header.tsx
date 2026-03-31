@@ -26,10 +26,10 @@ export default function Header() {
   };
 
   return (
-    <header className="fixed left-0 right-0 top-0 z-50 border-b border-slate-200/80 bg-white/75 backdrop-blur-xl">
+    <header className="animate-fade-in fixed left-0 right-0 top-0 z-50 border-b border-slate-200/80 bg-white/75 backdrop-blur-xl">
       <nav className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
-          <div className="flex-shrink-0">
+          <div className="animate-slide-up flex-shrink-0">
             <button
               onClick={() => scrollToSection("home")}
               className="flex items-center gap-3 text-left transition-opacity hover:opacity-90"
@@ -48,7 +48,7 @@ export default function Header() {
             </button>
           </div>
 
-          <div className="hidden items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.07)] md:flex">
+          <div className="hidden animate-slide-up items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.07)] md:flex">
             {navItems.map((item) => (
               <button
                 key={item.id}
@@ -60,7 +60,7 @@ export default function Header() {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden animate-slide-up md:block">
             <button
               onClick={handleWhatsAppClick}
               className="inline-flex items-center gap-2 rounded-full bg-slate-950 px-5 py-3 text-sm font-semibold text-white shadow-[0_14px_35px_rgba(15,23,42,0.2)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-cyan-500 hover:text-slate-950"
@@ -79,7 +79,7 @@ export default function Header() {
         </div>
 
         {isMenuOpen && (
-          <div className="mt-4 space-y-2 rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_20px_50px_rgba(15,23,42,0.12)] md:hidden">
+          <div className="animate-slide-up mt-4 space-y-2 rounded-3xl border border-slate-200 bg-white p-4 shadow-[0_20px_50px_rgba(15,23,42,0.12)] md:hidden">
             {navItems.map((item) => (
               <button
                 key={item.id}

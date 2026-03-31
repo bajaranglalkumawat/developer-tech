@@ -38,10 +38,11 @@ export default function About() {
             </p>
 
             <div className="space-y-4">
-              {features.map((feature) => (
+              {features.map((feature, index) => (
                 <div
                   key={feature}
-                  className="flex items-start gap-4 rounded-2xl border border-white/70 bg-white/80 px-5 py-4 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
+                  className="animate-slide-up flex items-start gap-4 rounded-2xl border border-white/70 bg-white/80 px-5 py-4 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
+                  style={{ animationDelay: `${index * 100}ms` }}
                 >
                   <CheckCircle className="mt-0.5 h-6 w-6 flex-shrink-0 text-cyan-600" />
                   <span className="font-medium text-slate-700">{feature}</span>
@@ -69,10 +70,11 @@ export default function About() {
                   { label: "Projects Completed", value: "50+" },
                 
                   { label: "Team Members", value: "8+" },
-                ].map((stat) => (
+                ].map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                    className="animate-slide-up rounded-3xl border border-white/10 bg-white/5 p-6"
+                    style={{ animationDelay: `${index * 120}ms` }}
                   >
                     <div className="mb-2 text-4xl font-bold text-white">
                       {stat.value}

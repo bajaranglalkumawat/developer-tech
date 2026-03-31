@@ -124,7 +124,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr]">
           <form
             onSubmit={handleSubmit}
-            className="space-y-4 rounded-[32px] border border-white/70 bg-white/90 p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)]"
+            className="animate-slide-up space-y-4 rounded-[32px] border border-white/70 bg-white/90 p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)]"
           >
             <div className="mb-2">
               <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">
@@ -250,7 +250,7 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="mt-12 text-center text-slate-600 animate-fade-in">
+        <div className="mt-12 text-center text-slate-600 animate-slide-up animation-delay-200">
           <p className="flex items-center justify-center gap-2">
             <MapPin className="h-5 w-5 text-cyan-700" />
             Available for freelance and full-time projects

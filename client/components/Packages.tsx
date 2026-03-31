@@ -72,27 +72,28 @@ export default function Packages() {
 
       <div className="relative mx-auto max-w-6xl">
         <div className="mb-16 text-center">
-          <p className="mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
+          <p className="animate-fade-in mb-4 inline-flex rounded-full border border-white/10 bg-white/5 px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-amber-300">
             Pricing
           </p>
-          <h2 className="text-4xl font-bold tracking-tight text-white md:text-5xl">
+          <h2 className="animate-fade-in text-4xl font-bold tracking-tight text-white md:text-5xl">
             Website packages designed for different stages of business.
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-300">
+          <p className="animate-slide-up mx-auto mt-4 max-w-2xl text-lg leading-8 text-slate-300">
             Pick the package that fits your current goals, and we will shape it
             into a website that looks premium and works smoothly.
           </p>
         </div>
 
         <div className="grid gap-7 lg:grid-cols-3">
-          {packages.map((pkg) => (
+          {packages.map((pkg, index) => (
             <div
               key={pkg.name}
-              className={`relative overflow-hidden rounded-[30px] border p-8 shadow-[0_24px_80px_rgba(2,8,23,0.35)] transition-transform duration-300 hover:-translate-y-2 ${
+              className={`animate-slide-up relative overflow-hidden rounded-[30px] border p-8 shadow-[0_24px_80px_rgba(2,8,23,0.35)] transition-transform duration-300 hover:-translate-y-2 ${
                 pkg.highlighted
                   ? "border-amber-300/40 bg-gradient-to-b from-white to-amber-50"
                   : "border-white/10 bg-white/[0.04] backdrop-blur-sm"
               }`}
+              style={{ animationDelay: `${index * 140}ms` }}
             >
               {pkg.highlighted && (
                 <div className="mb-6 inline-flex items-center gap-2 rounded-full bg-slate-950 px-4 py-2 text-xs font-bold uppercase tracking-[0.22em] text-amber-300">
@@ -174,7 +175,7 @@ export default function Packages() {
           ))}
         </div>
 
-        <div className="mt-14 rounded-[30px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur-sm">
+        <div className="animate-slide-up mt-14 rounded-[30px] border border-white/10 bg-white/[0.04] p-8 backdrop-blur-sm">
           <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
             <div>
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">
@@ -190,10 +191,11 @@ export default function Packages() {
           </div>
 
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-5">
-            {addons.map((addon) => (
+            {addons.map((addon, index) => (
               <div
                 key={addon.title}
-                className="rounded-3xl border border-white/10 bg-slate-900/70 p-5"
+                className="animate-slide-up rounded-3xl border border-white/10 bg-slate-900/70 p-5"
+                style={{ animationDelay: `${index * 90}ms` }}
               >
                 <h4 className="text-lg font-semibold text-white">{addon.title}</h4>
                 <p className="mt-3 text-sm font-medium text-amber-300">

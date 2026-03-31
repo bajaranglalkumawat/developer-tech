@@ -112,7 +112,7 @@ export default function Team() {
           ))}
         </div>
 
-        <div className="mt-10 grid gap-6 rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_24px_80px_rgba(15,23,42,0.35)] backdrop-blur-sm md:grid-cols-[1.4fr_1fr]">
+        <div className="animate-slide-up mt-10 grid gap-6 rounded-[32px] border border-white/10 bg-white/[0.04] p-8 shadow-[0_24px_80px_rgba(15,23,42,0.35)] backdrop-blur-sm md:grid-cols-[1.4fr_1fr]">
           <div className="animate-slide-up">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">
               Why teams choose us
@@ -128,7 +128,7 @@ export default function Team() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3 md:grid-cols-1">
-            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
+            <div className="animate-slide-up rounded-2xl border border-white/10 bg-slate-900/70 p-5 animation-delay-100">
               <div className="mb-2 text-4xl font-semibold text-white">
                 10+
               </div>
@@ -136,15 +136,15 @@ export default function Team() {
                 Years of combined execution experience
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
+            <div className="animate-slide-up rounded-2xl border border-white/10 bg-slate-900/70 p-5 animation-delay-200">
               <div className="mb-2 text-4xl font-semibold text-white">
-                100+
+                50+
               </div>
               <p className="text-sm leading-6 text-slate-300">
                 Delivery milestones completed with care
               </p>
             </div>
-            <div className="rounded-2xl border border-white/10 bg-slate-900/70 p-5">
+            <div className="animate-slide-up rounded-2xl border border-white/10 bg-slate-900/70 p-5">
               <div className="mb-2 text-4xl font-semibold text-white">
                 24/7
               </div>

@@ -42,57 +42,53 @@ export default function Services() {
   return (
     <section
       id="services"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-slate-50 via-blue-50 to-purple-50"
+      className="bg-transparent px-4 py-24 sm:px-6 lg:px-8"
     >
-      <div className="max-w-6xl mx-auto">
-        {/* Section heading */}
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4 animate-fade-in">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-16 text-center">
+          <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-sm animate-fade-in">
+            What We Do
+          </p>
+          <h2 className="mb-4 animate-fade-in text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Our Services
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto animate-slide-up">
+          <p className="mx-auto max-w-2xl text-lg leading-8 text-slate-600 animate-slide-up">
             We offer comprehensive web development services tailored to your
             business needs
           </p>
         </div>
 
-        {/* Services grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 section-3d">
+        <div className="grid grid-cols-1 gap-7 md:grid-cols-2 lg:grid-cols-3">
           {services.map((service, index) => {
             const Icon = service.icon;
             return (
               <div
                 key={service.title}
-                className="group card-3d p-8 bg-white rounded-2xl border border-gray-200 hover:border-blue-500 shadow-md hover:shadow-2xl transition-all duration-300 cursor-pointer animate-slide-up"
+                className="group animate-slide-up rounded-[28px] border border-white/70 bg-white/90 p-8 shadow-[0_20px_50px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-2 hover:border-cyan-200 hover:shadow-[0_28px_70px_rgba(14,116,144,0.18)]"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                {/* Icon with gradient background */}
-                <div className="mb-6 inline-block p-4 bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-300">
-                  <Icon className="w-6 h-6 text-blue-600 group-hover:text-white transition-colors duration-300" />
+                <div className="mb-6 inline-flex rounded-2xl bg-slate-950 p-4 text-cyan-300 shadow-[0_16px_36px_rgba(15,23,42,0.18)] transition-all duration-300 group-hover:bg-cyan-500 group-hover:text-slate-950">
+                  <Icon className="h-6 w-6" />
                 </div>
 
-                {/* Title */}
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-blue-600 transition-colors duration-300">
+                <h3 className="mb-3 text-2xl font-bold text-slate-950 transition-colors duration-300 group-hover:text-cyan-700">
                   {service.title}
                 </h3>
 
-                {/* Description */}
-                <p className="text-gray-600 group-hover:text-gray-700 transition-colors duration-300 mb-4">
+                <p className="mb-5 text-slate-600 transition-colors duration-300 group-hover:text-slate-700">
                   {service.description}
                 </p>
 
-                {/* Detailed description - shown on hover */}
-                <div className="max-h-0 overflow-hidden group-hover:max-h-40 transition-all duration-300">
-                  <p className="text-gray-600 text-sm py-3 border-t border-gray-200">
+                <div className="border-t border-slate-200 pt-4">
+                  <p className="text-sm leading-7 text-slate-500">
                     {service.details}
                   </p>
                 </div>
 
-                {/* Hover indicator */}
-                <div className="mt-4 flex items-center text-blue-600 font-semibold opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>Learn more</span>
+                <div className="mt-6 flex items-center text-sm font-semibold text-cyan-700 opacity-80 transition-opacity duration-300 group-hover:opacity-100">
+                  <span>Built for business impact</span>
                   <svg
-                    className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"
+                    className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1"
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"

@@ -152,8 +152,10 @@ export const handleQuerySubmit: RequestHandler = async (req, res) => {
       appendToGoogleSheet(payload),
     ]);
 
+    const succeeded = results.filter((result) => result.ok);
     const failed = results.filter((result) => !result.ok);
-    if (failed.length > 0) {
+
+    if (succeeded.length === 0) {
       const failureMessage = failed
         .map((result) => `${result.source}: ${result.error ?? "unknown error"}`)
         .join(" | ");
@@ -168,7 +170,12 @@ export const handleQuerySubmit: RequestHandler = async (req, res) => {
 
     const response: QuerySubmitResponse = {
       success: true,
-      message: "Query submitted successfully. Confirmation email sent.",
+      message:
+        failed.length === 0
+          ? "Query submitted successfully. Confirmation email sent."
+          : `Query submitted successfully. Partial delivery issue: ${failed
+              .map((result) => `${result.source} unavailable`)
+              .join(", ")}.`,
     };
     res.status(200).json(response);
   } catch (error) {

@@ -1,16 +1,15 @@
+import About from "@/components/About";
+import Contact from "@/components/Contact";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import Services from "@/components/Services";
-import About from "@/components/About";
-import Team from "@/components/Team";
 import Packages from "@/components/Packages";
-import Contact from "@/components/Contact";
+import Services from "@/components/Services";
+import Team from "@/components/Team";
 import WhatsAppButton from "@/components/WhatsAppButton";
-
 
 export default function Index() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-transparent">
       <Header />
       <main>
         <Hero />
@@ -21,119 +20,60 @@ export default function Index() {
         <Contact />
       </main>
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-gray-300 py-12 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
-
-            {/* Company info */}
+      <footer className="bg-slate-950 px-4 py-16 text-slate-300 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 grid grid-cols-1 gap-10 md:grid-cols-3">
             <div>
-              <div className="flex items-center gap-3 mb-4">
+              <div className="mb-4 flex items-center gap-3">
                 <img
                   src="https://cdn.builder.io/api/v1/image/assets%2Fd4a53b0ff269456c929711c56b0aa51a%2F671a297411b946ff807e974cafd8f3eb?format=webp&width=800&height=1200"
                   alt="Developer Tech Logo"
-                  className="w-12 h-12 rounded-full object-cover border-2 border-blue-400"
+                  className="h-12 w-12 rounded-2xl border border-cyan-300/40 object-cover"
                 />
                 <h3 className="text-2xl font-bold text-white">
                   Developer Tech
                 </h3>
               </div>
-              <p className="text-gray-400">
+              <p className="text-slate-400">
                 Building modern, scalable web applications for your success
               </p>
-              <p className="text-gray-400">Location: Jaipur, India</p>
+              <p className="mt-2 text-slate-400">Location: Jaipur, India</p>
             </div>
 
-            {/* Quick Links */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">
+              <h4 className="mb-4 text-lg font-semibold text-white">
                 Quick Links
               </h4>
-
               <ul className="space-y-2">
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("home")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Home
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("services")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Services
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("about")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    About Us
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("team")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Team
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("packages")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Packages
-                  </button>
-                </li>
-
-                <li>
-                  <button
-                    onClick={() =>
-                      document.getElementById("contact")
-                        ?.scrollIntoView({ behavior: "smooth" })
-                    }
-                    className="hover:text-blue-400 transition-colors"
-                  >
-                    Contact
-                  </button>
-                </li>
-
-               
+                {[
+                  ["Home", "home"],
+                  ["Services", "services"],
+                  ["About Us", "about"],
+                  ["Team", "team"],
+                  ["Packages", "packages"],
+                  ["Contact", "contact"],
+                ].map(([label, id]) => (
+                  <li key={id}>
+                    <button
+                      onClick={() =>
+                        document
+                          .getElementById(id)
+                          ?.scrollIntoView({ behavior: "smooth" })
+                      }
+                      className="transition-colors hover:text-cyan-300"
+                    >
+                      {label}
+                    </button>
+                  </li>
+                ))}
               </ul>
             </div>
 
-            {/* Tech Stack */}
             <div>
-              <h4 className="text-lg font-semibold text-white mb-4">
+              <h4 className="mb-4 text-lg font-semibold text-white">
                 Tech Stack
               </h4>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-slate-400">
                 <li>React.js</li>
                 <li>Node.js & Express</li>
                 <li>MongoDB</li>
@@ -141,14 +81,11 @@ export default function Index() {
                 <li>Cloud Computing</li>
               </ul>
             </div>
-
           </div>
 
-          {/* Bottom */}
-          <div className="border-t border-gray-700 pt-8 text-center text-gray-400">
-            © 2024 Developer Tech. All rights reserved.
+          <div className="border-t border-white/10 pt-8 text-center text-slate-500">
+            Copyright 2024 Developer Tech. All rights reserved.
           </div>
-
         </div>
       </footer>
 

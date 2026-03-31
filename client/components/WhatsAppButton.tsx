@@ -8,13 +8,14 @@ export default function WhatsAppButton() {
   return (
     <button
       onClick={handleWhatsAppClick}
-      className="fixed bottom-8 right-8 z-40 p-4 bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white rounded-full shadow-xl hover:shadow-2xl transition-all duration-300 button-3d"
+      className="button-3d fixed bottom-6 right-6 z-40 flex items-center gap-3 rounded-full border border-white/20 bg-slate-950 px-5 py-4 text-white shadow-[0_22px_60px_rgba(15,23,42,0.3)] transition-all duration-300 hover:bg-green-500"
       style={{
         animation: "whatsappPulse 2s ease-in-out infinite",
       }}
       title="Chat with us on WhatsApp"
     >
-      <MessageCircle className="w-7 h-7" />
+      <MessageCircle className="h-6 w-6" />
+      <span className="hidden text-sm font-semibold sm:inline">Chat Now</span>
     </button>
   );
 }

@@ -8,6 +8,18 @@ import { Textarea } from "@/components/ui/textarea";
 const apiBaseUrl = (import.meta.env.VITE_API_BASE_URL ?? "").trim();
 
 function getApiUrl(path: string) {
+  if (typeof window !== "undefined") {
+    const hostname = window.location.hostname;
+    const isLocalhost =
+      hostname === "localhost" ||
+      hostname === "127.0.0.1" ||
+      hostname === "::1";
+
+    if (isLocalhost) {
+      return path;
+    }
+  }
+
   if (!apiBaseUrl) {
     return path;
   }
@@ -94,23 +106,35 @@ export default function Contact() {
   return (
     <section
       id="contact"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-gray-50 to-white"
+      className="px-4 py-24 sm:px-6 lg:px-8"
     >
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-14 animate-fade-in">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 text-center animate-fade-in">
+          <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-cyan-700 shadow-sm">
+            Contact
+          </p>
+          <h2 className="mb-4 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
             Send Your Query
           </h2>
-          <p className="text-xl text-gray-600">
+          <p className="text-lg leading-8 text-slate-600">
             Fill the form and we will send confirmation to your email.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1.15fr_0.85fr]">
           <form
             onSubmit={handleSubmit}
-            className="card-3d p-8 bg-white rounded-2xl border border-gray-200 shadow-md space-y-4"
+            className="space-y-4 rounded-[32px] border border-white/70 bg-white/90 p-8 shadow-[0_24px_60px_rgba(15,23,42,0.08)]"
           >
+            <div className="mb-2">
+              <p className="text-sm font-semibold uppercase tracking-[0.2em] text-cyan-700">
+                Project Form
+              </p>
+              <h3 className="mt-2 text-2xl font-semibold text-slate-950">
+                Tell us what you want to build
+              </h3>
+            </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <Input
                 placeholder="Your name"
@@ -120,6 +144,7 @@ export default function Contact() {
                 }
                 minLength={2}
                 required
+                className="h-12 rounded-2xl border-slate-200 bg-slate-50 px-4"
               />
               <Input
                 type="email"
@@ -129,6 +154,7 @@ export default function Contact() {
                   setFormData((prev) => ({ ...prev, email: event.target.value }))
                 }
                 required
+                className="h-12 rounded-2xl border-slate-200 bg-slate-50 px-4"
               />
             </div>
 
@@ -139,6 +165,7 @@ export default function Contact() {
               onChange={(event) =>
                 setFormData((prev) => ({ ...prev, phone: event.target.value }))
               }
+              className="h-12 rounded-2xl border-slate-200 bg-slate-50 px-4"
             />
 
             <Input
@@ -149,6 +176,7 @@ export default function Contact() {
               }
               minLength={3}
               required
+              className="h-12 rounded-2xl border-slate-200 bg-slate-50 px-4"
             />
 
             <Textarea
@@ -157,12 +185,16 @@ export default function Contact() {
               onChange={(event) =>
                 setFormData((prev) => ({ ...prev, message: event.target.value }))
               }
-              className="min-h-36"
+              className="min-h-36 rounded-2xl border-slate-200 bg-slate-50 px-4 py-3"
               minLength={10}
               required
             />
 
-            <Button type="submit" className="w-full" disabled={isSubmitting}>
+            <Button
+              type="submit"
+              className="h-12 w-full rounded-full bg-slate-950 text-white hover:bg-cyan-600"
+              disabled={isSubmitting}
+            >
               <Send className="w-4 h-4" />
               {isSubmitting ? "Sending..." : "Submit Query"}
             </Button>
@@ -171,8 +203,8 @@ export default function Contact() {
               <p
                 className={
                   status.ok
-                    ? "text-sm text-green-600 font-medium"
-                    : "text-sm text-red-600 font-medium"
+                    ? "text-sm font-medium text-green-600"
+                    : "text-sm font-medium text-red-600"
                 }
               >
                 {status.text}
@@ -181,36 +213,36 @@ export default function Contact() {
           </form>
 
           <div className="space-y-6">
-            <div className="group card-3d p-7 bg-white rounded-2xl border border-gray-200 hover:border-green-500 shadow-md hover:shadow-2xl transition-all duration-300 animate-slide-up">
-              <div className="mb-4 inline-block p-4 bg-green-100 rounded-xl group-hover:bg-green-500 transition-colors duration-300">
-                <MessageCircle className="w-8 h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
+            <div className="group rounded-[30px] border border-white/70 bg-white/90 p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition-all duration-300 animate-slide-up hover:-translate-y-1">
+              <div className="mb-4 inline-flex rounded-2xl bg-green-100 p-4 transition-colors duration-300 group-hover:bg-green-500">
+                <MessageCircle className="h-8 w-8 text-green-600 transition-colors duration-300 group-hover:text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">WhatsApp</h3>
-              <p className="text-gray-600 mb-5">
+              <h3 className="mb-2 text-2xl font-bold text-slate-950">WhatsApp</h3>
+              <p className="mb-5 text-slate-600">
                 Need quick support? Chat with us directly.
               </p>
               <Button
                 type="button"
                 onClick={handleWhatsAppClick}
-                className="bg-green-500 hover:bg-green-600 text-white"
+                className="rounded-full bg-green-500 px-6 text-white hover:bg-green-600"
               >
                 <MessageCircle className="w-5 h-5" />
                 Click to Chat
               </Button>
             </div>
 
-            <div className="group card-3d p-7 bg-white rounded-2xl border border-gray-200 hover:border-blue-500 shadow-md hover:shadow-2xl transition-all duration-300 animate-slide-up animation-delay-100">
-              <div className="mb-4 inline-block p-4 bg-blue-100 rounded-xl group-hover:bg-blue-500 transition-colors duration-300">
-                <Mail className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
+            <div className="group rounded-[30px] border border-white/70 bg-white/90 p-7 shadow-[0_24px_60px_rgba(15,23,42,0.08)] transition-all duration-300 animate-slide-up animation-delay-100 hover:-translate-y-1">
+              <div className="mb-4 inline-flex rounded-2xl bg-cyan-100 p-4 transition-colors duration-300 group-hover:bg-cyan-500">
+                <Mail className="h-8 w-8 text-cyan-700 transition-colors duration-300 group-hover:text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2">Email</h3>
-              <p className="text-gray-600 mb-5">
+              <h3 className="mb-2 text-2xl font-bold text-slate-950">Email</h3>
+              <p className="mb-5 text-slate-600">
                 Prefer email? Reach us directly at:
               </p>
               <button
                 type="button"
                 onClick={handleEmailClick}
-                className="text-blue-600 font-semibold hover:text-blue-700 transition-colors"
+                className="font-semibold text-cyan-700 transition-colors hover:text-cyan-800"
               >
                 kumawatbajaranglal736@gmail.com
               </button>
@@ -218,9 +250,9 @@ export default function Contact() {
           </div>
         </div>
 
-        <div className="text-center mt-12 text-gray-600 animate-fade-in">
+        <div className="mt-12 text-center text-slate-600 animate-fade-in">
           <p className="flex items-center justify-center gap-2">
-            <MapPin className="w-5 h-5 text-blue-600" />
+            <MapPin className="h-5 w-5 text-cyan-700" />
             Available for freelance and full-time projects
           </p>
         </div>

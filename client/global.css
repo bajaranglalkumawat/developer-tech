@@ -1,5 +1,5 @@
 /** @import must precede all other statements */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -105,7 +105,12 @@
 
   body {
     @apply bg-background text-foreground;
+    font-family: "Manrope", sans-serif;
     scroll-behavior: smooth;
+    background:
+      radial-gradient(circle at top left, rgba(34, 211, 238, 0.08), transparent 28%),
+      radial-gradient(circle at top right, rgba(251, 191, 36, 0.08), transparent 24%),
+      linear-gradient(180deg, #f8fbff 0%, #f4f7fb 55%, #eef3f8 100%);
   }
 
   html {
@@ -158,13 +163,12 @@
 
   .team-card-3d {
     perspective: 1300px;
-    transform-style: preserve-3d; 
+    transform-style: preserve-3d;
     display: flex;
-  justify-content: center;   /* center align */
-  gap: 50px;                 /* equal space */
-  flex-wrap: wrap;
+    justify-content: center;
+    gap: 50px;
+    flex-wrap: wrap;
     transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
   }
 
   .team-card-3d:hover {

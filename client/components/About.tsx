@@ -13,60 +13,71 @@ export default function About() {
   return (
     <section
       id="about"
-      className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-br from-white via-blue-50 to-purple-50"
+      className="px-4 py-24 sm:px-6 lg:px-8"
     >
-      <div className="max-w-6xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left content */}
+      <div className="mx-auto max-w-6xl">
+        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2">
           <div className="animate-slide-up">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <p className="mb-4 inline-flex rounded-full border border-slate-200 bg-white/80 px-4 py-2 text-sm font-semibold uppercase tracking-[0.22em] text-amber-700 shadow-sm">
+              About Us
+            </p>
+            <h2 className="mb-6 text-4xl font-bold tracking-tight text-slate-950 md:text-5xl">
               About Developer Tech
             </h2>
-            <p className="text-lg text-gray-600 mb-6">
+            <p className="mb-6 text-lg leading-8 text-slate-600">
               Developer Tech is a modern web development company dedicated to
               building fast, secure, and scalable web applications. We help
               businesses transform their digital presence with responsive,
               user-friendly, and performance-driven websites.
             </p>
-            <p className="text-lg text-gray-600 mb-8">
+            <p className="mb-8 text-lg leading-8 text-slate-600">
               With expertise in React, Node.js, and MongoDB, we deliver
               comprehensive full-stack solutions that combine cutting-edge
               technology with exceptional user experience. Our commitment to
               clean code, scalability, and client satisfaction sets us apart.
             </p>
 
-            {/* Features list */}
             <div className="space-y-4">
               {features.map((feature) => (
                 <div
                   key={feature}
-                  className="flex items-start gap-3 animate-slide-up"
+                  className="flex items-start gap-4 rounded-2xl border border-white/70 bg-white/80 px-5 py-4 shadow-[0_14px_40px_rgba(15,23,42,0.06)]"
                 >
-                  <CheckCircle className="w-6 h-6 text-blue-600 flex-shrink-0 mt-0.5" />
-                  <span className="text-gray-700 font-medium">{feature}</span>
+                  <CheckCircle className="mt-0.5 h-6 w-6 flex-shrink-0 text-cyan-600" />
+                  <span className="font-medium text-slate-700">{feature}</span>
                 </div>
               ))}
             </div>
           </div>
 
-          {/* Right side - visual element */}
-          <div className="relative animate-fade-in card-3d transition-transform duration-500">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl opacity-10 blur-2xl"></div>
-            <div className="relative bg-gradient-to-br from-blue-50 to-purple-50 rounded-2xl p-12 border border-blue-200 shadow-lg hover:shadow-2xl">
-              <div className="space-y-8">
+          <div className="relative animate-fade-in">
+            <div className="absolute inset-0 rounded-[32px] bg-gradient-to-br from-cyan-400/20 via-transparent to-amber-300/20 blur-2xl" />
+            <div className="relative rounded-[32px] border border-white/70 bg-slate-950 p-8 shadow-[0_30px_80px_rgba(15,23,42,0.22)] md:p-12">
+              <div className="mb-8 flex items-center justify-between border-b border-white/10 pb-6">
+                <div>
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-cyan-300">
+                    Studio Strength
+                  </p>
+                  <h3 className="mt-2 text-3xl font-semibold text-white">
+                    Built to deliver with clarity
+                  </h3>
+                </div>
+              </div>
+              <div className="grid gap-6 sm:grid-cols-2">
                 {[
                   { label: "Years Experience", value: "5+" },
                   { label: "Projects Completed", value: "50+" },
-                  { label: "Happy Clients", value: "40+" },
+                
                   { label: "Team Members", value: "8+" },
                 ].map((stat) => (
-                  <div key={stat.label}>
-                    <div className="text-4xl font-bold text-blue-600 mb-2">
+                  <div
+                    key={stat.label}
+                    className="rounded-3xl border border-white/10 bg-white/5 p-6"
+                  >
+                    <div className="mb-2 text-4xl font-bold text-white">
                       {stat.value}
                     </div>
-                    <div className="text-gray-600 font-medium">
-                      {stat.label}
-                    </div>
+                    <div className="font-medium text-slate-300">{stat.label}</div>
                   </div>
                 ))}
               </div>

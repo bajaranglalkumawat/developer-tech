@@ -1,3 +1,5 @@
+import TechVisual from "@/components/TechVisual";
+
 export default function Hero() {
   const handleWhatsAppClick = () => {
     window.open("https://wa.me/919828920866", "_blank");
@@ -122,6 +124,8 @@ export default function Hero() {
               </div>
             </div>
           </div>
+
+          <TechVisual />
         </div>
       </div>
     </section>

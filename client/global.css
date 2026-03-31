@@ -145,6 +145,10 @@
     animation: blob 7s infinite;
   }
 
+  .animate-float-soft {
+    animation: floatSoft 6s ease-in-out infinite;
+  }
+
   .text-3d {
     perspective: 1000px;
     transform-style: preserve-3d;
@@ -316,5 +320,84 @@
   }
   50% {
     transform: scale(1.1);
+  }
+}
+
+@keyframes floatSoft {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.tech-line {
+  animation: techPulse 3.6s ease-in-out infinite;
+}
+
+.tech-ring {
+  animation: techDash 4s ease-in-out infinite;
+  transform-origin: center;
+}
+
+.tech-bars rect {
+  animation: techBars 2.8s ease-in-out infinite;
+  transform-box: fill-box;
+  transform-origin: center bottom;
+}
+
+.tech-bars rect:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.tech-bars rect:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.tech-bars rect:nth-child(4) {
+  animation-delay: 0.45s;
+}
+
+.tech-bars rect:nth-child(5) {
+  animation-delay: 0.6s;
+}
+
+.tech-bars rect:nth-child(6) {
+  animation-delay: 0.75s;
+}
+
+@keyframes techPulse {
+  0%,
+  100% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 0 rgba(34, 211, 238, 0));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.4));
+  }
+}
+
+@keyframes techDash {
+  0%,
+  100% {
+    stroke-dashoffset: 42;
+  }
+  50% {
+    stroke-dashoffset: 10;
+  }
+}
+
+@keyframes techBars {
+  0%,
+  100% {
+    transform: scaleY(0.92);
+    opacity: 0.82;
+  }
+  50% {
+    transform: scaleY(1.04);
+    opacity: 1;
   }
 }

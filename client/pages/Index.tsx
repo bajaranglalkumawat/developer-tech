@@ -5,6 +5,7 @@ import Hero from "@/components/Hero";
 import Packages from "@/components/Packages";
 import Services from "@/components/Services";
 import Team from "@/components/Team";
+import Trust from "@/components/Trust";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export default function Index() {
@@ -16,6 +17,7 @@ export default function Index() {
         <Services />
         <Team />
         <About />
+        <Trust />
         <Packages />
         <Contact />
       </main>

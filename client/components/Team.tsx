@@ -1,23 +1,20 @@
 const teamMembers = [
   {
-    name: "Bajarang Kumawat",
-    role: "Full Stack Developer",
+
     image:
       "https://cdn.builder.io/api/v1/image/assets%2Fd4a53b0ff269456c929711c56b0aa51a%2F651c2c5d382b408195bea1e95a57971d?format=webp&width=1600&height=2400",
   },
   {
-    name: "Hemlata",
-    role: "UI/UX Designer",
+
     image:
       "https://cdn.builder.io/api/v1/image/assets%2Fd4a53b0ff269456c929711c56b0aa51a%2F43976ef7eb13410bb7ebc491b670ee6a?format=webp&width=800&height=1200",
   },
   {
-    name: "Sourav Kumar Sharma",
-    role: "Frontend Developer",
+
+    name: "John Doe",
     image:
       "https://cdn.builder.io/api/v1/image/assets%2Fd4a53b0ff269456c929711c56b0aa51a%2F815d6cefb944435d9f55f149ecfe8d79?format=webp&width=800&height=1200",
   },
- 
 ];
 
 export default function Team() {
@@ -42,7 +39,7 @@ export default function Team() {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 section-3d">
           {teamMembers.map((member, index) => (
             <div
-              key={member.name}
+              key={index}
               className="group team-card-3d animate-slide-up transition-transform duration-500"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -60,7 +57,6 @@ export default function Team() {
                 <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors duration-300">
                   {member.name}
                 </h3>
-                <p className="text-blue-600 font-semibold">{member.role}</p>
               </div>
             </div>
           ))}

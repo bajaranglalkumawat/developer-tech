@@ -4,12 +4,20 @@
     <loc>https://developer-tech.onrender.com/</loc>
   </url>
   <url>
-    <loc>https://developer-tech.onrender.com/#about</loc>
+    <loc>https://developer-tech.onrender.com/about</loc>
   </url>
   <url>
-    <loc>https://developer-tech.onrender.com/#services</loc>
+    <loc>https://developer-tech.onrender.com/services</loc>
   </url>
   <url>
-    <loc>https://developer-tech.onrender.com/#contact</loc>
+    <loc>https://developer-tech.onrender.com/contact</loc>
+  </url> 
+
+  <url>
+    <loc>https://developer-tech.onrender.com/home</loc>
+  </url>  
+
+  <url>
+    <loc>https://developer-tech.onrender.com/team</loc>
   </url>
 </urlset>

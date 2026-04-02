@@ -1,6 +1,6 @@
 import path from "path";
+import express from "express";
 import { createServer } from "./index";
-import * as express from "express";
 
 const app = createServer();
 const port = process.env.PORT || 3000;
@@ -9,8 +9,16 @@ const port = process.env.PORT || 3000;
 const __dirname = import.meta.dirname;
 const distPath = path.join(__dirname, "../spa");
 
-// Serve static files
+// Serve static files and essential crawl files
 app.use(express.static(distPath));
+
+app.get("/robots.txt", (_req, res) => {
+  res.type("text/plain").sendFile(path.join(distPath, "robots.txt"));
+});
+
+app.get("/sitemap.xml", (_req, res) => {
+  res.type("application/xml").sendFile(path.join(distPath, "sitemap.xml"));
+});
 
 // Handle React Router - serve index.html for all non-API routes
 app.get("*", (req, res) => {

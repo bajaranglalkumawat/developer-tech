@@ -12,4 +12,4 @@ Allow: /
 
 User-agent: *
 Allow: /
-Sitemap: https://developer-tech.onrender.com/sitemap.xml
+Sitemap: https://developertech.in/sitemap.xml

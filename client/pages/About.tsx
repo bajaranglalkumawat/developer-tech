@@ -7,7 +7,7 @@ const About = () => (
       title="About | Developer Tech - Affordable Web Design Experts"
       description="Developer Tech is a part of Jaipur web development community, offering affordable web design and technical expertise for businesses in India."
       keywords="web development services in India, website developer in Jaipur, affordable web design, ecommerce website development"
-      canonical="https://www.developer-tech.com/about"
+      canonical="https://developertech.in/about"
     />
 
     <main className="max-w-5xl mx-auto p-6">

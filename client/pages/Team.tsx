@@ -6,7 +6,7 @@ const Team = () => (
       title="Team | Developer Tech - Website Developer in Jaipur"
       description="Meet the Developer Tech team from Jaipur, delivering web development services in India and affordable web design with professional expertise."
       keywords="web development services in India, website developer in Jaipur, affordable web design, ecommerce website development"
-      canonical="https://www.developer-tech.com/team"
+      canonical="https://developertech.in/team"
     />
 
     <main className="max-w-5xl mx-auto p-6">

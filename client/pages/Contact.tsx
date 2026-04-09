@@ -6,7 +6,7 @@ const Contact = () => (
       title="Contact | Developer Tech - Website Developer Jaipur"
       description="Get in touch with Developer Tech for web development services in India, including affordable web design and ecommerce website development from Jaipur."
       keywords="web development services in India, website developer in Jaipur, affordable web design, ecommerce website development"
-      canonical="https://www.developer-tech.com/contact"
+      canonical="https://developertech.in/contact"
     />
 
     <main className="max-w-5xl mx-auto p-6">

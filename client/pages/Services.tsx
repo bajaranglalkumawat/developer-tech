@@ -7,7 +7,7 @@ const Services = () => (
       title="Services | Developer Tech - Website Developer in Jaipur"
       description="Services by Developer Tech include affordable web design, ecommerce website development and full-stack web development in India."
       keywords="web development services in India, website developer in Jaipur, affordable web design, ecommerce website development"
-      canonical="https://www.developer-tech.com/services"
+      canonical="https://developertech.in/services"
     />
 
     <main className="max-w-5xl mx-auto p-6">

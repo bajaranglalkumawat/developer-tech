@@ -7,7 +7,7 @@ const Packages = () => (
       title="Packages | Developer Tech - Affordable Web Design Plans"
       description="Developer Tech offers affordable web design packages for freelancers and businesses, with ecommerce website development and custom web development services."
       keywords="web development services in India, website developer in Jaipur, affordable web design, ecommerce website development"
-      canonical="https://www.developer-tech.com/packages"
+      canonical="https://developertech.in/packages"
     />
 
     <main className="max-w-5xl mx-auto p-6">

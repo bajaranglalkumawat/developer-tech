@@ -18,6 +18,13 @@
   </url>  
 
   <url>
-    <loc>https://developertech.in/team</loc>
+    <loc>https://developertech.in/team</loc>  
   </url>
+
+  <url>
+  <loc>https://developertech.in/</loc>
+  <lastmod>2026-04-13</lastmod>
+  <changefreq>weekly</changefreq>
+  <priority>1.0</priority>
+</url>
 </urlset>

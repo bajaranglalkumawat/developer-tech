@@ -15,6 +15,7 @@ export default defineConfig({
   },
   build: {
     outDir: "dist/spa",
+    target: "es2018",
   },
   plugins: [
     react(),

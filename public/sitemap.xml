@@ -6,27 +6,27 @@
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://developertech.in/about</loc>
+    <loc>https://developertech.in/About</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://developertech.in/services</loc>
+    <loc>https://developertech.in/Services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://developertech.in/packages</loc>
+    <loc>https://developertech.in/Packages</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://developertech.in/team</loc>
+    <loc>https://developertech.in/Team</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://developertech.in/contact</loc>
+    <loc>https://developertech.in/Contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

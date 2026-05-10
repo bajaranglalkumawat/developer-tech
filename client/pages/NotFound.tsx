@@ -15,7 +15,7 @@ const NotFound = () => {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <SEO
-        title="Page Not Found | Developer Tech"
+        title="404 Page Not Found | Developer Tech"
         description="The page you requested could not be found."
         keywords="404, page not found"
         canonical="https://developertech.in/"

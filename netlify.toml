@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build:client"
+  command = "pnpm build"
   functions = "netlify/functions"
   publish = "dist/spa"
 
@@ -13,3 +13,13 @@
   from = "/api/*"
   status = 200
   to = "/.netlify/functions/api/:splat"
+
+[[redirects]]
+  from = "/home"
+  to = "/"
+  status = 301
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200

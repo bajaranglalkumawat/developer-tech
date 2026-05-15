@@ -22,6 +22,7 @@ export default function Header() {
     { label: "About Us", id: "about" },
     { label: "Team", id: "team" },
     { label: "Packages", id: "packages" },
+    { label: "Blog", to: "/blog" },
     { label: "Contact", id: "contact" },
   ];
 
@@ -55,11 +56,17 @@ export default function Header() {
 
           {/* Desktop Nav */}
           <div className="hidden animate-slide-up items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.07)] lg:flex">
-            {navItems.map((item) => (
-              <button key={item.id} onClick={() => scrollToSection(item.id)} className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-950 hover:text-white">
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) =>
+              item.to ? (
+                <Link key={item.label} to={item.to} className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-950 hover:text-white">
+                  {item.label}
+                </Link>
+              ) : (
+                <button key={item.id} onClick={() => scrollToSection(item.id)} className="rounded-full px-4 py-2 text-sm font-semibold text-slate-600 transition-all duration-200 hover:bg-slate-950 hover:text-white">
+                  {item.label}
+                </button>
+              ),
+            )}
           </div>
 
           {/* Right Buttons */}
@@ -112,11 +119,17 @@ export default function Header() {
                 Login
               </Link>
             )}
-            {navItems.map((item) => (
-              <button key={item.id} onClick={() => scrollToSection(item.id)} className="block w-full rounded-2xl px-4 py-3 text-left text-slate-700 hover:bg-slate-100">
-                {item.label}
-              </button>
-            ))}
+            {navItems.map((item) =>
+              item.to ? (
+                <Link key={item.label} to={item.to} onClick={() => setIsMenuOpen(false)} className="block w-full rounded-2xl px-4 py-3 text-left text-slate-700 hover:bg-slate-100">
+                  {item.label}
+                </Link>
+              ) : (
+                <button key={item.id} onClick={() => { scrollToSection(item.id); setIsMenuOpen(false); }} className="block w-full rounded-2xl px-4 py-3 text-left text-slate-700 hover:bg-slate-100">
+                  {item.label}
+                </button>
+              ),
+            )}
             <button onClick={handleWhatsAppClick} className="mt-2 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-950 px-4 py-3 text-sm font-semibold text-white">
               <PhoneCall className="h-4 w-4" />
               Start a Project

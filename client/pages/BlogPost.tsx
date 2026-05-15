@@ -13,10 +13,10 @@ const BlogPost = () => {
     },
   });
 
-  if (isLoading) return <div className="mx-auto max-w-5xl p-6 animate-pulse">Loading article...</div>;
+  if (isLoading) return <div className="mx-auto max-w-3xl p-4 animate-pulse">Loading article...</div>;
 
   return (
-    <main className="mx-auto max-w-4xl p-6">
+    <main className="mx-auto max-w-3xl p-4">
       <SEO
         title={data.metaTitle}
         description={data.metaDescription}
@@ -34,9 +34,16 @@ const BlogPost = () => {
           author: { "@type": "Person", name: data.authorName },
         }}
       />
-      <h1 className="text-3xl font-bold">{data.title}</h1>
-      <p className="mt-2 text-sm text-muted-foreground">{data.category}</p>
-      <article className="prose mt-6 max-w-none" dangerouslySetInnerHTML={{ __html: data.content }} />
+      <div className="animate-slide-up rounded-3xl border border-slate-200 bg-white p-5 shadow-sm">
+        <div className="space-y-4">
+          <h1 className="text-3xl font-semibold text-slate-950">{data.title}</h1>
+          {data.featuredImage && (
+            <img src={data.featuredImage} alt={data.title} className="w-full rounded-3xl object-cover" />
+          )}
+          {data.excerpt && <p className="text-base leading-7 text-slate-600">{data.excerpt}</p>}
+        </div>
+        <article className="prose prose-slate max-w-none pt-6 text-slate-700" dangerouslySetInnerHTML={{ __html: data.content }} />
+      </div>
     </main>
   );
 };

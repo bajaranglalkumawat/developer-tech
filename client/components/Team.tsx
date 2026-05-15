@@ -49,7 +49,7 @@ export default function Team() {
               A focused digital team building reliable products for real
               business growth.
             </h2>
-            <p className="max-w-2xl text-lg leading-8 text-slate-300">
+            <p className="max-w-2xl text-lg leading-8 text-white/90 font-medium">
               We combine product thinking, clean design, and modern engineering
               to deliver websites that feel premium and perform with
               confidence.
@@ -95,11 +95,11 @@ export default function Team() {
               </div>
 
               <div className="space-y-5 p-6">
-                <p className="text-base leading-7 text-slate-300">
+                <p className="text-base leading-7 text-white font-medium">
                   {member.focus}
                 </p>
                 <div className="flex items-center justify-between border-t border-white/10 pt-4">
-                  <span className="text-sm font-medium text-slate-400">
+                  <span className="text-sm font-semibold text-slate-200">
                     Professional execution
                   </span>
                   <span className="inline-flex items-center gap-2 text-sm font-semibold text-cyan-300">

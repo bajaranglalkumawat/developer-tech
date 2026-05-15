@@ -1,4 +1,5 @@
 import { CheckCircle } from "lucide-react";
+import CounterNumber from "./CounterNumber";
 
 const features = [
   "Clean, maintainable code following industry best practices",
@@ -66,20 +67,20 @@ export default function About() {
               </div>
               <div className="grid gap-6 sm:grid-cols-2">
                 {[
-                  { label: "Years Experience", value: "5+" },
-                  { label: "Projects Completed", value: "50+" },
-                
-                  { label: "Team Members", value: "8+" },
+                  { label: "Years Experience", value: 5 },
+                  { label: "Projects Completed", value: 50 },
+                  { label: "Team Members", value: 8 },
                 ].map((stat, index) => (
                   <div
                     key={stat.label}
-                    className="animate-slide-up rounded-3xl border border-white/10 bg-white/5 p-6"
+                    className="animate-slide-up rounded-3xl border border-white/10 bg-white/5 p-6 transition-all hover:border-white/20 hover:bg-white/10"
                     style={{ animationDelay: `${index * 120}ms` }}
                   >
-                    <div className="mb-2 text-4xl font-bold text-white">
-                      {stat.value}
+                    <div className="mb-2 flex items-baseline gap-1 text-4xl font-bold text-white">
+                      <CounterNumber end={stat.value} duration={2000} />
+                      <span>+</span>
                     </div>
-                    <div className="font-medium text-slate-300">{stat.label}</div>
+                    <div className="font-semibold text-white">{stat.label}</div>
                   </div>
                 ))}
               </div>

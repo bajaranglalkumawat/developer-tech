@@ -24,13 +24,15 @@ export default defineConfig({
 
   plugins: [
     react(),
-    {
+
+    // only run express middleware in development
+    process.env.NODE_ENV !== "production" && {
       name: "express-api-middleware",
       configureServer(server) {
         server.middlewares.use(createApiServer());
       },
     },
-  ],
+  ].filter(Boolean),
 
   resolve: {
     alias: {

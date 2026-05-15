@@ -19,6 +19,10 @@ services:
         sync: false
       - key: JWT_EXPIRES_IN
         value: 7d
+      - key: JWT_ACCESS_EXPIRES_IN
+        value: 15m
+      - key: JWT_REFRESH_EXPIRES_IN
+        value: 30d
       - key: ADMIN_EMAIL
         sync: false
       - key: ADMIN_PASSWORD
@@ -31,6 +35,10 @@ services:
         sync: false
       - key: BREVO_SENDER_NAME
         value: Developer Tech Support
+      - key: GOOGLE_CLIENT_ID
+        sync: false
+      - key: GOOGLE_CLIENT_SECRET
+        sync: false
       - key: GOOGLE_SHEETS_WEBHOOK_URL
         sync: false
       - key: PING_MESSAGE

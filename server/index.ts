@@ -1,5 +1,6 @@
 import express from "express";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 import dotenv from "dotenv";
 import path from "node:path";
 import helmet from "helmet";
@@ -30,7 +31,8 @@ export function createServer() {
   const publicDir = path.join(process.cwd(), "public");
 
   app.disable("x-powered-by");
-  app.use(cors());
+  app.use(cors({ origin: true, credentials: true }));
+  app.use(cookieParser());
   app.use(helmet({ contentSecurityPolicy: false }));
   app.use(compression());
   app.use(express.json({ limit: "2mb" }));
@@ -71,6 +73,12 @@ export function createServer() {
 
   app.get("/api/ping", (_req, res) => {
     res.status(200).json({ message: process.env.PING_MESSAGE ?? "pong" });
+  });
+
+  app.get("/api/config/public", (_req, res) => {
+    const googleClientId =
+      env.GOOGLE_CLIENT_ID?.trim() || process.env.VITE_GOOGLE_CLIENT_ID?.trim() || "";
+    res.status(200).json({ googleClientId });
   });
 
   app.get("/api/demo", handleDemo);

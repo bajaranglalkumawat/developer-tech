@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LayoutDashboard, LogIn, LogOut, Menu, PhoneCall, Sparkles, X } from "lucide-react";
 import { Link, useNavigate } from "react-router-dom";
-import { clearUserSession, getUserProfile } from "@/lib/user-api";
+import { getUserProfile, userLogout } from "@/lib/user-api";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -30,8 +30,8 @@ export default function Header() {
     window.open("https://wa.me/919828920866", "_blank");
   };
 
-  const logout = () => {
-    clearUserSession();
+  const logout = async () => {
+    await userLogout();
     setUser(null);
     setIsMenuOpen(false);
     navigate("/", { replace: true });

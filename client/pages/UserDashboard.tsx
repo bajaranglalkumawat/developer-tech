@@ -19,6 +19,7 @@ import {
   getUserProfile,
   UserProfile,
   userApiFetch,
+  userLogout,
 } from "@/lib/user-api";
 
 interface ProjectRequestItem {
@@ -78,8 +79,8 @@ const UserDashboard = () => {
     };
   }, [navigate]);
 
-  const logout = () => {
-    clearUserSession();
+  const logout = async () => {
+    await userLogout();
     toast.success("Logged out");
     navigate("/", { replace: true });
   };

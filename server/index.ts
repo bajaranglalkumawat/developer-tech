@@ -7,7 +7,6 @@ import compression from "compression";
 import mongoSanitize from "express-mongo-sanitize";
 import rateLimit from "express-rate-limit";
 import xss from "xss-clean";
-import { connectDb } from "./config/db";
 import { env } from "./config/env";
 import { errorHandler } from "./middleware/error";
 import { handleDemo } from "./routes/demo";
@@ -24,8 +23,6 @@ import userAuthRoutes from "./routes/user-auth";
 import { generateSitemapXml } from "./utils/sitemap";
 
 dotenv.config();
-
-void connectDb();
 
 export function createServer() {
   const app = express();

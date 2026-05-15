@@ -1,10 +1,12 @@
 import path from "path";
 import { fileURLToPath } from "url";
 import express from "express";
+import { connectDb } from "./config/db";
 import { createServer } from "./index";
 
 const app = createServer();
-const port = process.env.PORT || 3000;
+const port = Number(process.env.PORT) || 3000;
+const host = process.env.HOST || "0.0.0.0";
 
 // In production, serve the built SPA files
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -31,10 +33,11 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(distPath, "index.html"));
 });
 
-app.listen(port, () => {
-  console.log(`🚀 Fusion Starter server running on port ${port}`);
-  console.log(`📱 Frontend: http://localhost:${port}`);
-  console.log(`🔧 API: http://localhost:${port}/api`);
+await connectDb();
+
+app.listen(port, host, () => {
+  console.log(`🚀 Fusion Starter server running on http://${host}:${port}`);
+  console.log(`🔧 API: http://${host}:${port}/api`);
 });
 
 // Graceful shutdown

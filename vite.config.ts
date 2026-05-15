@@ -1,7 +1,6 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import path from "path";
-import { createServer as createApiServer } from "./server";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -28,8 +27,11 @@ export default defineConfig({
     // only run express middleware in development
     process.env.NODE_ENV !== "production" && {
       name: "express-api-middleware",
-      configureServer(server) {
-        server.middlewares.use(createApiServer());
+      async configureServer(server) {
+        const { createServer } = await import("./server");
+        const { connectDb } = await import("./server/config/db");
+        await connectDb();
+        server.middlewares.use(createServer());
       },
     },
   ].filter(Boolean),

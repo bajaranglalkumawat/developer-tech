@@ -5,14 +5,14 @@ services:
     region: oregon
     plan: starter
     branch: main
-    buildCommand: pnpm install && pnpm run build
-    startCommand: node dist/server/node-build.mjs
+    buildCommand: pnpm install --frozen-lockfile && pnpm run build
+    startCommand: pnpm start
     healthCheckPath: /health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: 8080
+      - key: NODE_VERSION
+        value: "22"
       - key: MONGODB_URI
         sync: false
       - key: JWT_SECRET

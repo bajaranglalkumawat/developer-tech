@@ -13,10 +13,15 @@ export default defineConfig({
       deny: [".env", ".env.*", "*.{crt,pem}", "**/.git/**"],
     },
   },
+
   build: {
     outDir: "dist/spa",
     target: "es2018",
+
+    // chunk warning limit
+    chunkSizeWarningLimit: 1000,
   },
+
   plugins: [
     react(),
     {
@@ -26,10 +31,11 @@ export default defineConfig({
       },
     },
   ],
+
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./client"),
       "@shared": path.resolve(__dirname, "./shared"),
     },
   },
-}); 
+});

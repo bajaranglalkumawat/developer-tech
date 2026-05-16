@@ -22,41 +22,62 @@ import type {
   UserSignupVerifyResponse,
 } from "@shared/api";
 
-function useGoogleClientId(): string {
+function useGoogleClientId(): { clientId: string; loading: boolean } {
   const buildTimeId = import.meta.env.VITE_GOOGLE_CLIENT_ID?.trim() ?? "";
-  const [clientId, setClientId] = useState(buildTimeId);
+  const [clientId, setClientId] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (buildTimeId) return;
-
     let cancelled = false;
     void (async () => {
       try {
         const response = await fetch("/api/config/public");
-        if (!response.ok) return;
-        const data = (await response.json()) as PublicConfigResponse;
-        const resolved = data.googleClientId?.trim() ?? "";
-        if (!cancelled && resolved) {
-          setClientId(resolved);
+        if (response.ok) {
+          const data = (await response.json()) as PublicConfigResponse;
+          const serverId = data.googleClientId?.trim() ?? "";
+          if (!cancelled) {
+            setClientId(serverId || buildTimeId);
+          }
+          return;
         }
       } catch {
-        // Google sign-in stays hidden if config cannot be loaded
+        // Fall back to build-time client ID below
       }
-    })();
+      if (!cancelled) {
+        setClientId(buildTimeId);
+      }
+    })().finally(() => {
+      if (!cancelled) {
+        setLoading(false);
+      }
+    });
 
     return () => {
       cancelled = true;
     };
   }, [buildTimeId]);
 
-  return clientId;
+  return { clientId, loading };
 }
 
 function googleAuthErrorMessage(error: unknown): string {
   if (error instanceof UserApiError) {
     if (error.code === "DISPOSABLE_EMAIL") return error.message;
-    if (error.code === "GOOGLE_ACCOUNT_MISMATCH") return error.message;
-    if (error.code === "GOOGLE_AUTH_FAILED") return error.message;
+    if (error.code === "GOOGLE_ACCOUNT_MISMATCH") {
+      return `${error.message} Sign in with the Google account you used before, or use email and password.`;
+    }
+    if (error.code === "GOOGLE_AUTH_FAILED") {
+      if (error.message.toLowerCase().includes("not configured")) {
+        return "Google sign-in is not available right now. Use email and password instead.";
+      }
+      if (
+        error.message.toLowerCase().includes("mismatch") ||
+        error.message.toLowerCase().includes("client id")
+      ) {
+        return "Google sign-in could not be verified. Try again in a few seconds or use email and password.";
+      }
+      return error.message;
+    }
     if (error.code === "ACCOUNT_DISABLED") return error.message;
     if (error.retryAfterSec) {
       return `${error.message} (${error.retryAfterSec}s remaining)`;
@@ -436,7 +457,7 @@ const Login = ({ googleClientId }: LoginProps) => {
                     }}
                     onError={() =>
                       toast.error(
-                        "Google sign-in was cancelled or blocked. Allow popups for this site and try again.",
+                        "Google sign-in failed. Check that this site URL is allowed in Google Cloud Console (Authorized JavaScript origins), disable ad blockers, and try again.",
                       )
                     }
                     theme="outline"
@@ -680,15 +701,15 @@ function VerifyPendingBlock({
 }
 
 function LoginWithGoogle() {
-  const googleClientId = useGoogleClientId();
+  const { clientId, loading } = useGoogleClientId();
 
-  if (!googleClientId) {
+  if (loading || !clientId) {
     return <Login googleClientId="" />;
   }
 
   return (
-    <GoogleOAuthProvider clientId={googleClientId}>
-      <Login googleClientId={googleClientId} />
+    <GoogleOAuthProvider key={clientId} clientId={clientId}>
+      <Login googleClientId={clientId} />
     </GoogleOAuthProvider>
   );
 }

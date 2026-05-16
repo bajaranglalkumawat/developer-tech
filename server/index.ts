@@ -76,8 +76,7 @@ export function createServer() {
   });
 
   app.get("/api/config/public", (_req, res) => {
-    const googleClientId =
-      env.GOOGLE_CLIENT_ID?.trim() || process.env.VITE_GOOGLE_CLIENT_ID?.trim() || "";
+    const googleClientId = env.GOOGLE_CLIENT_ID?.trim() ?? "";
     res.status(200).json({ googleClientId });
   });
 

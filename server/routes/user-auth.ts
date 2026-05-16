@@ -581,9 +581,11 @@ router.post("/google", validateBody(googleSchema), async (req, res, next) => {
       return;
     }
 
-    let user = await User.findOne({
-      $or: [{ googleId: verified.googleId }, { email: verified.email }],
-    });
+    const userByGoogleId = await User.findOne({ googleId: verified.googleId });
+    const userByEmail = userByGoogleId
+      ? null
+      : await User.findOne({ email: verified.email });
+    let user = userByGoogleId ?? userByEmail;
 
     if (user) {
       await clearLockIfExpired(user);
@@ -603,6 +605,14 @@ router.post("/google", validateBody(googleSchema), async (req, res, next) => {
       }
 
       if (!user.googleId) {
+        const googleIdTaken = await User.findOne({ googleId: verified.googleId });
+        if (googleIdTaken && String(googleIdTaken._id) !== String(user._id)) {
+          res.status(409).json({
+            message: "This Google account is already linked to another email address.",
+            code: "GOOGLE_ACCOUNT_MISMATCH",
+          });
+          return;
+        }
         user.googleId = verified.googleId;
       }
 

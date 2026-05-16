@@ -456,19 +456,19 @@ const Login = ({ googleClientId }: LoginProps) => {
               {googleClientId ? (
                 <div className="mb-6 space-y-5">
                   <GoogleLogin
+                    onSuccess={(response) => {
                       if (googleSignInInProgress.current || loading) return;
-                      if (loading) return;
                       if (!response.credential) {
                         toast.error("Google did not return a sign-in token. Try again.");
                         return;
                       }
                       void signInWithGoogle(response.credential);
                     }}
-                    onError={() =>
+                    onError={() => {
                       toast.error(
                         "Google sign-in failed. Check that this site URL is allowed in Google Cloud Console (Authorized JavaScript origins), disable ad blockers, and try again.",
-                      )
-                    }
+                      );
+                    }}
                     theme="outline"
                     size="large"
                     width="100%"

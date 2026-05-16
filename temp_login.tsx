@@ -105,6 +105,8 @@ const Login = ({ googleClientId }: LoginProps) => {
   const [showResendPrompt, setShowResendPrompt] = useState(false);
   const [forgotOpen, setForgotOpen] = useState(false);
   const navigate = useNavigate();
+
+  // FIX: Add ref to prevent duplicate Google sign-in attempts
   const googleSignInInProgress = useRef(false);
 
   useEffect(() => {
@@ -122,29 +124,30 @@ const Login = ({ googleClientId }: LoginProps) => {
     navigate("/", { replace: true });
   };
 
+  // FIX: Updated signInWithGoogle with proper guard to prevent duplicate calls
   const signInWithGoogle = async (idToken: string) => {
-  if (googleSignInInProgress.current) return;
-
-  googleSignInInProgress.current = true;
-  setLoading(true);
-
-  try {
-    const data = await userApiFetch<UserLoginResponse>(
-      "/api/user-auth/google",
-      {
+    // Prevent duplicate API calls
+    if (googleSignInInProgress.current) {
+      return;
+    }
+    googleSignInInProgress.current = true;
+    
+    setLoading(true);
+    try {
+      const data = await userApiFetch<UserLoginResponse>("/api/user-auth/google", {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ idToken }),
-      },
-    );
+      });
+      completeLogin(data, "Signed in successfully");
+    } catch (error) {
+      toast.error(googleAuthErrorMessage(error));
+    } finally {
+      setLoading(false);
+      googleSignInInProgress.current = false;
+    }
+  };
 
-    completeLogin(data, "Signed in successfully");
-  } catch (error) {
-    toast.error(googleAuthErrorMessage(error));
-  } finally {
-    googleSignInInProgress.current = false;
-    setLoading(false);
-  }
-};
   const handleSignupSendError = (error: unknown) => {
     if (error instanceof UserApiError) {
       if (error.code === "DISPOSABLE_EMAIL") {
@@ -456,8 +459,10 @@ const Login = ({ googleClientId }: LoginProps) => {
               {googleClientId ? (
                 <div className="mb-6 space-y-5">
                   <GoogleLogin
+                    onSuccess={(response) => {
+                      // FIX: Prevent duplicate Google sign-in attempts using ref
                       if (googleSignInInProgress.current || loading) return;
-                      if (loading) return;
+                      
                       if (!response.credential) {
                         toast.error("Google did not return a sign-in token. Try again.");
                         return;

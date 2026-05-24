@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => (
   <footer className="bg-gray-900 text-gray-200 py-10 px-4 sm:px-6 lg:px-8">
-    <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-3">
+    <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-4">
       <div>
         <h3 className="text-xl font-bold mb-3">Developer Tech</h3>
         <p>Web Development Services in India from Jaipur-based experts.</p>
@@ -16,6 +16,14 @@ const Footer = () => (
           <li><Link className="hover:text-blue-300" to="/team">Team</Link></li>
           <li><Link className="hover:text-blue-300" to="/packages">Packages</Link></li>
           <li><Link className="hover:text-blue-300" to="/contact">Contact</Link></li>
+        </ul>
+      </div>
+      <div>
+        <h3 className="text-xl font-bold mb-3">Legal</h3>
+        <ul className="space-y-2">
+          <li><Link className="hover:text-blue-300" to="/privacy-policy">Privacy Policy</Link></li>
+          <li><Link className="hover:text-blue-300" to="/terms-and-conditions">Terms & Conditions</Link></li>
+          <li><Link className="hover:text-blue-300" to="/blog">Blog</Link></li>
         </ul>
       </div>
       <div>

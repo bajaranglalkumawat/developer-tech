@@ -121,6 +121,8 @@ export default function Index() {
                     { label: "Packages", id: "packages" },
                     { label: "Blog", to: "/blog" },
                     { label: "Contact", id: "contact" },
+                    { label: "Privacy Policy", to: "/privacy-policy" },
+                    { label: "Terms & Conditions", to: "/terms-and-conditions" },
                   ].map((item) => (
                     <li key={item.label}>
                       {item.to ? (

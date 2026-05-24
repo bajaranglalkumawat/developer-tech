@@ -18,8 +18,10 @@ import Login from "./pages/Login";
 import VerifyEmail from "./pages/VerifyEmail";
 import NotFound from "./pages/NotFound";
 import Packages from "./pages/Packages";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 import Services from "./pages/Services";
 import Team from "./pages/Team";
+import TermsAndConditions from "./pages/TermsAndConditions";
 import UserDashboard from "./pages/UserDashboard";
 import AdminBlogs from "./pages/admin/AdminBlogs";
 import AdminBlogCreate from "./pages/admin/AdminBlogCreate";
@@ -49,6 +51,8 @@ export const App = () => (
           <Route path="/verify-email" element={<VerifyEmail />} />
           <Route path="/blog" element={<BlogList />} />
           <Route path="/blog/:slug" element={<BlogPost />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
           <Route element={<UserProtectedRoute />}>
             <Route path="/dashboard" element={<UserDashboard />} />
           </Route>

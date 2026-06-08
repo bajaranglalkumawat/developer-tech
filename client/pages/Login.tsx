@@ -455,25 +455,26 @@ const Login = ({ googleClientId }: LoginProps) => {
 
               {googleClientId ? (
                 <div className="mb-6 space-y-5">
-                  <GoogleLogin
-                    onSuccess={(response) => {
-                      if (googleSignInInProgress.current || loading) return;
-                      if (!response.credential) {
-                        toast.error("Google did not return a sign-in token. Try again.");
-                        return;
-                      }
-                      void signInWithGoogle(response.credential);
-                    }}
-                    onError={() => {
-                      toast.error(
-                        "Google sign-in failed. Check that this site URL is allowed in Google Cloud Console (Authorized JavaScript origins), disable ad blockers, and try again.",
-                      );
-                    }}
-                    theme="outline"
-                    size="large"
-                    width="100%"
-                    text="continue_with"
-                  />
+                  <div className="w-full">
+                    <GoogleLogin
+                      onSuccess={(response) => {
+                        if (googleSignInInProgress.current || loading) return;
+                        if (!response.credential) {
+                          toast.error("Google did not return a sign-in token. Try again.");
+                          return;
+                        }
+                        void signInWithGoogle(response.credential);
+                      }}
+                      onError={() => {
+                        toast.error(
+                          "Google sign-in failed. Check that this site URL is allowed in Google Cloud Console (Authorized JavaScript origins), disable ad blockers, and try again.",
+                        );
+                      }}
+                      theme="outline"
+                      size="large"
+                      text="continue_with"
+                    />
+                  </div>
                   <div className="relative text-center text-xs font-semibold uppercase tracking-wide text-slate-400">
                     <span className="bg-slate-50 px-2">or continue with email</span>
                     <span className="absolute inset-x-0 top-1/2 -z-10 border-t border-slate-200" />
